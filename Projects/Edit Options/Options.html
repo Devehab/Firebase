@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Options</title>
+<meta charset="UTF-8" />
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+</head>
+
+<body>
+<h1 id="nameUser" style="text-align: center;">Options</h1>
+
+ <div class="container">
+       
+   <div class="row">
+    <div class="input-field col s6">
+      <input value="#fff" id="Font_background" type="text" class="validate">
+      <label class="active" for="Font_background">backgroundColor</label>
+    </div>
+  </div>
+
+    
+    <p class="range-field col s6">
+    <label class="active" for="Font_input">Font Size</label>
+      <input type="range" id="Font_input" min="0" max="100"style=" width: 300px; " />
+    </p></br>
+
+
+    <div class="row">
+    <div class="input-field col s6">
+      <input value="مرحباً" id="Notif_input" type="text" class="validate">
+      <label class="active" for="Notif_input">Notification</label>
+    </div>
+  </div>
+
+  <button id="Notif_button" class="btn waves-effect waves-light" type="submit" name="action">ارسال
+    <i class="material-icons right">send</i>
+  </button>
+ </div>
+
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+
+<script>
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAzvhjwAXIRkUPA4WdkP8D1jAECYPGVWak",
+    authDomain: "my-website-e18f2.firebaseapp.com",
+    databaseURL: "https://my-website-e18f2.firebaseio.com",
+    storageBucket: "my-website-e18f2.appspot.com",
+  };
+
+  firebase.initializeApp(config);
+
+
+document.getElementById("Font_background").addEventListener('change', function() {
+firebase.database().ref('Options/' ).set({
+    FontSize: document.getElementById("Font_input").value,
+    Notification: document.getElementById("Notif_input").value,
+    backgroundColor: document.getElementById("Font_background").value
+  });
+});
+
+document.getElementById("Font_input").addEventListener('change', function() {
+firebase.database().ref('Options/' ).set({
+    FontSize: document.getElementById("Font_input").value,
+    Notification: document.getElementById("Notif_input").value,
+    backgroundColor: document.getElementById("Font_background").value
+  });
+});
+
+document.getElementById("Notif_button").addEventListener('click', function() {
+firebase.database().ref('Options/' ).set({
+    Notification: document.getElementById("Notif_input").value,
+    FontSize: document.getElementById("Font_input").value,
+    backgroundColor: document.getElementById("Font_background").value
+  });
+});
+
+</script>
+
+</body>
+
+</html>

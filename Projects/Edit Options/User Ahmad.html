@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>الجهاز الخاص بـــ : احمد</title>
+<meta charset="UTF-8" />
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+</head>
+
+<body>
+<h1 id="nameUser" style="text-align: center;">الجهاز الخاص بـــ : احمد</h1>
+
+     
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+
+<script>
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAzvhjwAXIRkUPA4WdkP8D1jAECYPGVWak",
+    authDomain: "my-website-e18f2.firebaseapp.com",
+    databaseURL: "https://my-website-e18f2.firebaseio.com",
+    storageBucket: "my-website-e18f2.appspot.com",
+  };
+
+  firebase.initializeApp(config);
+
+ // Change background Color
+ var dbRef_backgroundColor = firebase.database().ref().child('/Options/backgroundColor');
+ dbRef_backgroundColor.on('value', snap=>document.body.style.backgroundColor = snap.val());
+
+ // Change font size
+ var dbRef_fontSize = firebase.database().ref().child('/Options/FontSize');
+ dbRef_fontSize.on('value', function(snap) {
+  var nameUser = document.getElementById('nameUser');
+  var fontSize = snap.val().toString() + 'px';
+  nameUser.style.fontSize = fontSize;
+
+ }); 
+
+  // Show Notification
+  var dbRef_Notif = firebase.database().ref().child('/Options/Notification');
+ dbRef_Notif.on('value', function(snap) {
+ Materialize.toast(snap.val(), 4000);
+ }); 
+
+
+</script>
+
+</body>
+
+</html>
