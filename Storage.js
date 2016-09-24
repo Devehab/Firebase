@@ -111,7 +111,7 @@ console.log('File available at', url);
 //-------------------------------  Delete a File
 
 var storageRef = firebase.storage().ref();
-var desertRef = storageRef.child('images/13690853_313616588974422_2246931861189083089_n.jpg');
+var desertRef = storageRef.child('images/name_file.jpg');
 desertRef.delete().then(function() {
   console.log(' File deleted successfully');
 }).catch(function(error) {
@@ -142,13 +142,15 @@ var storageRef = firebase.storage().ref();
 var forestRef = storageRef.child('images/forest.jpg');
 
 var newMetadata = {
-  cacheControl: 'public,max-age=300',
+  timeCreated: Date.now(),
   contentType: 'image/jpeg'
 }
 
 
 forestRef.updateMetadata(newMetadata).then(function(metadata) {
    console.log(metadata);
+    console.log('timeCreated: '+ metadata.timeCreated);
+    console.log('contentType: '+ metadata.contentType);
 }).catch(function(error) {
   console.log(' Uh-oh, an error occurred!');
 });
@@ -161,8 +163,8 @@ var storageRef = firebase.storage().ref();
 var forestRef = storageRef.child('images/forest.jpg');
 var newMetadata = {
   customMetadata: {
-    'location': 'Yosemite, CA, USA',
-    'activity': 'Hiking'
+    'location': 'Amman, JO',
+    'activity': 'Fase'
   }
 }
 
