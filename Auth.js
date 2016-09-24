@@ -62,7 +62,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   } else {
      console.log("User is signed out .");
   }
-
+});
 
 //---------------------------------------- email Verified
 
