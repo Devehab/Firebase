@@ -1,0 +1,42 @@
+// Write
+
+".write":"auth.uid === '8mUuUsoZHtPUEwVSirJOpcTGrCs1'",
+auth !== null,
+true
+
+
+
+// Read
+
+ ".read"::"auth.uid === '8mUuUsoZHtPUEwVSirJOpcTGrCs1'",
+auth !== null,
+true
+
+
+// Validate
+
+ ".validate": " newData.hasChildren(['content', 'timestamp']) 
+ && newData.child('content').isString() 
+ && newData.child('timestamp').isNumber()",
+
+
+
+
+
+//-------------------------------- signIn
+
+var email = "pro2014learning@gmail.com";
+var password = "abcd1234";
+
+firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  console.log(error.code , error.message );
+});
+
+
+//---------------------------- signOut
+
+firebase.auth().signOut().then(function() {
+  console.log("Sign-out successful."); 
+}, function(error) {
+  console.log(' An error happened.' , error);
+});
