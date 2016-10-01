@@ -1,0 +1,83 @@
+
+//---------------------------- rules PUBLIC
+service firebase.storage {
+  match /b/your-firbase-storage-bucket/o {
+    match /{allPaths=**} {
+      allow read, write;
+    }
+  }
+}
+
+
+
+var email = "pro2014learning@gmail.com";
+var password = "abcd1234";
+firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  console.log(error.code , error.message );
+});
+
+firebase.auth().signOut().then(function() {
+  console.log("Sign-out successful."); 
+}, function(error) {
+  console.log(' An error happened.' , error);
+});
+
+
+
+
+//---------------------------- Rulse
+
+service firebase.storage {
+  match /b/test-762f9.appspot.com/o {
+   
+    match /images/{imageId} {
+      allow write: if request.auth != null 
+                   && request.resource.size < 14 * 1024 // KB
+                   && request.resource.contentType.matches('image/.*')
+                   && imageId.size() < 33;
+
+      allow read: if request.auth != null ;
+    }
+  }
+}
+
+
+//////////////// ++
+
+ match /user/{userId}/{allPaths=**} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
+
+
+
+
+  //-------------------------------  Download Data via URL
+
+var storageRef = firebase.storage().ref();
+var starsRef = storageRef.child('images/fase1.png');
+
+starsRef.getDownloadURL().then(function(url) {
+document.getElementById("myImage").src = url;
+console.log('File available at', url);
+
+}).catch(function(error) {
+  switch (error.code) {
+    case 'storage/object_not_found':
+      console.log(' File doesnt exist');
+      break;
+
+    case 'storage/unauthorized':
+      console.log('User doesnt have permission to access the object');
+      break;
+
+    case 'storage/canceled':
+      console.log(' User canceled the upload');
+      break;
+
+    case 'storage/unknown':
+      console.log('Unknown error occurred, inspect the server response');
+      break;
+  }
+});
+
