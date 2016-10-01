@@ -17,8 +17,9 @@ true
 
  ".validate": " newData.hasChildren(['content', 'timestamp']) 
  && newData.child('content').isString() 
- && newData.child('timestamp').isNumber()",
-
+ && newData.child('timestamp').isNumber()
+ && newData.val()
+ && newData.val().length < 100 ",
 
 
 
