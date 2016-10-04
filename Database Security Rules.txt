@@ -13,6 +13,9 @@ auth !== null,
 true
 
 
+
+
+
 // Validate
 
  ".validate": " newData.hasChildren(['content', 'timestamp']) 
@@ -23,6 +26,33 @@ true
 
 
 
+//--------------------------------- Get Data
+
+var UserID = '8mUuUsoZHtPUEwVSirJOpcTGrCs1';
+var MyPath = firebase.database().ref('Users/'+ UserID);
+MyPath.once('value')
+  .then(function(GetData) {
+
+    var Data = GetData.val();
+
+    console.log(Data);
+
+  });
+  
+  
+  
+  var UserID = '8mUuUsoZHtPUEwVSirJOpcTGrFs1';
+  var data = {Name:'Ali', Date_of_birth: '11/5/1996', Weight:80 };
+var MyPath = firebase.database().ref('Users/'+UserID );
+MyPath.set(data)
+  .then(function() {
+    console.log('succeeded');
+  })
+  .catch(function(error) {
+    console.log("failed: " + error.message);
+  });
+  
+  
 
 //-------------------------------- signIn
 
